@@ -25,5 +25,17 @@ public class EstateBO {
 		return estateMapper.selectEstateListByAreaPrice(area, price);
 	}
 	
+	// input : Estate
+	// output : 성공한 행의 개수
+	public int addEstate(Estate estate) {
+		return estateMapper.insertEstate(estate);
+	}
+	
+	public int addEstateAsField(int realtorId, String address, int area, String type, int price, Integer rentPrice) {
+	
+		return estateMapper.insertEstateAsField(realtorId, address, area, type, price, rentPrice);
+		
+	}
+	
 	
 }
