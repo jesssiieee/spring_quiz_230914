@@ -37,5 +37,14 @@ public class EstateBO {
 		
 	}
 	
+	public int updateEstateById(int id, String type, int price) {
+		return estateMapper.updateEstateById(id, type, price);
+	}
+	
+	// quiz04 delete
+	public int deleteEstateById(int id) {
+		return estateMapper.deleteEstateById(id);
+	}
+	
 	
 }
