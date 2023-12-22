@@ -17,8 +17,8 @@ public class RealtorBO {
 		realtorMapper.insertRealtor(realtor);
 	}
 	
-	public void getRealtorById(int id) {
-		realtorMapper.selectRealtorById(id);
+	public Realtor getRealtorById(int id) {
+		return realtorMapper.selectRealtorById(id);
 	}
 
 }

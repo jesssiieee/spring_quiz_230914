@@ -26,30 +26,25 @@ public class Lesson04Quiz02Controller {
 		return "lesson04/addRealtor";
 	}
 	
-	// 방금가입된 학생 화면 & DB에 insert
+	// DB에 insert & 방금가입된 학생 화면
 	// url : http://localhost:8080/lesson04/quiz02/add-realtor
 	@PostMapping("/add-realtor")
 	public String addRealtor(
 			@ModelAttribute Realtor realtor, 
 			Model model) {
 		
-		// insert
+		// insert => 방금 추가된 pk 받아옴 => realtor에 세팅
 		realtorBO.addRealtor(realtor);
 		
-		// 사용자 select
-		int id = realtor.getId();
-		
-		// select by id
-		realtorBO.getRealtorById(id);
+		// realtor에 세팅된 id로 객체 다시 조회
+		Realtor latestRealtor = realtorBO.getRealtorById(realtor.getId());
 		
 		// Model 객체에 담는다
-		model.addAttribute("realtor", realtor);
+		model.addAttribute("realtor", latestRealtor);
 		
-		// 화면 뿌리기
+		// jsp화면으로 이동
 		return "lesson04/afterAddRealtor";
 		
 	}
-	
-	
 	
 }
