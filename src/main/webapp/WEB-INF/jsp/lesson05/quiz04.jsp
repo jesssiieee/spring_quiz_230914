@@ -30,10 +30,34 @@
 					<tr>
 						<td>${status.count }</td>
 						<td>${member.getName() }</td>
-						<td>${member.getPhoneNumber() }</td>
-						<td>${member.getNationality() }</td>
-						<td>${member.getEmail() }</td>
-						<td>${member.getIntroduce() }</td>
+						<td>
+							<c:choose>
+								<c:when test="${fn:split(member.getPhoneNumber(), '-')[0] ne '010' }">
+									유효하지 않은 전화번호		
+								</c:when>
+								<c:otherwise>
+									${member.getPhoneNumber() }
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							${fn:substring(member.getNationality(), 0, 2) } - 
+							${ fn:split(member.getNationality(), " ")[1] }
+						</td>
+						<td>
+							<b>${fn:split(member.getEmail(), '@')[0] }</b>@
+							${fn:split(member.getEmail(), '@')[1] }
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${fn:length(member.getIntroduce()) >= 15 }">
+									<c:out value="${fn:substring(member.getIntroduce(), 0, 15) }" /> ...
+								</c:when>
+								<c:otherwise>
+									${member.getIntroduce()}
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>
