@@ -45,8 +45,7 @@
 							${ fn:split(member.getNationality(), " ")[1] }
 						</td>
 						<td>
-							<b>${fn:split(member.getEmail(), '@')[0] }</b>@
-							${fn:split(member.getEmail(), '@')[1] }
+							<b>${fn:split(member.getEmail(), '@')[0] }</b>@${fn:split(member.getEmail(), '@')[1] }
 						</td>
 						<td>
 							<c:choose>
