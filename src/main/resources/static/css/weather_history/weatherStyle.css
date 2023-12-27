@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.main {
+	background-color: white;
+	height: 800px;	
+}
+
+footer {
+	background-color: blue;
+	height: 200px;
+}
+
+.menu {
+	background-color: #50bcdf;
+}
