@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quiz.lesson05.domain.Member;
+// 소스트리용 주
 
 @Controller
 @RequestMapping("/lesson05")
