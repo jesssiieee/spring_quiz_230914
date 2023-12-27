@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quiz.weather_history.bo.WeatherHistoryBO;
@@ -26,7 +27,11 @@ public class WeatherHistoryController {
 	
 	// url : http://localhost:8080/weather_history/weather-list-view
 	@GetMapping("/weather-list-view")
-	public String weatherListView(Model model) {
+	public String weatherListView(
+			Model model,
+			@ModelAttribute WeatherHistory weatherHistory ) {
+		
+		weatherHistoryBO.addWeather(weatherHistory);
 		
 		List<WeatherHistory> weatherList = (List<WeatherHistory>) weatherHistoryBO.getWeatherHistoryById();
 		model.addAttribute("weatherList", weatherList);

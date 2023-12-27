@@ -17,9 +17,11 @@
 		<div class="">
 			<div class="main d-flex">
 				<aside class="menu col-2">
-      				<img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      				기상청
-					<ul class="navbar-nav">
+					<div class="mt-3">
+	      				<img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+	      				<span class="active ml-2">기상청</span>
+	      			</div>
+					<ul class="navbar-nav ml-4">
 						<li class="nav-item">
          			 		<a class="nav-link active" href="#">날씨</a>
         				</li>
@@ -83,7 +85,13 @@
 					</table>
 				</div>
 			</div>
-			<footer class=""></footer>
+			<footer class="d-flex">
+				<img src="/img/logo.jpg" alt="기상청 로고 이름" width="400px" height="150px"> 
+				<div class="f-style mt-4 ml-2">
+					(07062) 서울시 동작구 여의대방로16길 61 <br>
+					Copyright@20XX KMA. All Rights ERSERVED.
+				</div>
+			</footer>
 		</div>
 	</body>
 </html>

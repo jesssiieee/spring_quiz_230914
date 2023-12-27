@@ -8,6 +8,8 @@ import com.quiz.weather_history.domain.WeatherHistory;
 
 @Repository
 public interface WeatherHistoryMapper {
+	
+	public void insertWeather (WeatherHistory weatherHistory);
 
 	public List<WeatherHistory> selectWeatherHistoryById();
 	

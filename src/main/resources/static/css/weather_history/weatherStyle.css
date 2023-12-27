@@ -2,14 +2,29 @@
 
 .main {
 	background-color: white;
-	height: 800px;	
+	height: 1000px;	
 }
 
 footer {
-	background-color: blue;
+	background-color: white;
 	height: 200px;
 }
 
 .menu {
 	background-color: #50bcdf;
 }
+
+.active {
+	color: white;
+	font-size: 20px;
+}
+
+.f-style {
+	color: grey;
+}
+
+.option-style {
+	width:150px;
+	height: 30px;
+}
+
