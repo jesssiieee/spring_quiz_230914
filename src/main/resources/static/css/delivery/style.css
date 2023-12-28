@@ -2,13 +2,9 @@
 
 #wrap {
 	width:800px;
-	height: 1000px;
 	margin: auto;
 }
 
-.contents {
-	min-height:500px;
-}
 
 header {
 	background-color:#00a3d2;
@@ -25,13 +21,12 @@ p {
 	font-weigth: 100;
 }
 
-.main{
-	height: 800px;
-}
-
 .line {
 	border: thin solid #00a3d2;
 	height : 120px;
 	weigth : 700px;
 }
 
+a:link {
+	color: black;
+}

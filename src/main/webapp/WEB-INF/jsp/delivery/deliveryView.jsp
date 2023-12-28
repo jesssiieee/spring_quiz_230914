@@ -15,7 +15,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 		
 		<!-- css -->
-		<link rel="stylesheet" type="text/css" href="/css/store/style.css">
+		<link rel="stylesheet" type="text/css" href="/css/delivery/style.css">
 	</head>
 	<body>
 		<div id="wrap">
@@ -35,14 +35,16 @@
 				
 				<div class="main">
 				
-					<c:forEach items="${storeList }" var="slist">
-						<div class="line mt-3">
-							<div class="ml-3 mt-3">
-								<b>${slist.name }</b><br>
-								<small></small><br>
-								<small></small><br>
+					<c:forEach items="${deliveryList }" var="dlist">
+						<a href="http://localhost:8080/delivery/delivery-review?storeId=${dlist.id }&storeName=${dlist.storeName }">
+							<div class="line mt-3">
+								<div class="ml-3 mt-3">
+									<b>${dlist.name }</b><br>
+									<small>전화번호 : ${dlist.phoneNumber }</small><br>
+									<small>주소 : ${dlist.address }</small><br>
+								</div>
 							</div>
-						</div>
+						</a>
 					</c:forEach>
 				
 				</div>
@@ -54,7 +56,6 @@
 						<small>고객센터: 1500-1500</small>
 					</div>
 				</footer>
-				
 			</div>
 		</div>
 	</body>

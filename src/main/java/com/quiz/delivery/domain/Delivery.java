@@ -1,8 +1,8 @@
-package com.quiz.store.domain;
+package com.quiz.delivery.domain;
 
 import java.util.Date;
 
-public class Store {
+public class Delivery {
 
 	private int id;
 	private String name;
