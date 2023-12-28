@@ -4,35 +4,35 @@
  
  <mapper namespace="com.quiz.weather_history.mapper.WeatherHistoryMapper">
  
- 	<insert id="insertWeather" parameterType="com.quiz.weather_history.domain.WeatherHistory">
+ 	<insert id="insertWeatherHistory" parameterType="map">
  		
- 		INSERT INTO
- 		(
- 			`date`
-			, `weather`
-			, `temperatures`
-			, `precipitation`
-			, `microDust`
-			, `windSpeed`
-			, `createdAt`
-			, `updatedAt`
+ 		INSERT INTO `weather_history`
+		(
+			`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
 		)
- 		values
- 		(
- 			#{date}
- 			, #{weather}
- 			, #{temperatures}
- 			, #{precipitation}
- 			, #{microDust}
- 			, #{windSpeed}
- 			, NOW()
- 			, NOW()
- 		)
+		VALUES
+		(
+			#{date}
+			, #{weather}
+			, #{temperatures}
+			, #{precipitation}
+			, #{microDust}
+			, #{windSpeed}
+			, NOW()
+			, NOW()
+		)
  		
  	</insert>
  
  
- 	<select id="selectWeatherHistoryById" resultType="com.quiz.weather_history.domain.WeatherHistory">
+ 	<select id="selectWeatherHistoryList" resultType="com.quiz.weather_history.domain.WeatherHistory">
  		
  		SELECT
 			`id`

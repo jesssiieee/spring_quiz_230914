@@ -2,10 +2,13 @@ package com.quiz.weather_history.domain;
 
 import java.util.Date;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 public class WeatherHistory {
 
 	private int id;
-	private String date;
+	// @RequestParam("date") attribute로 받아올때
+	private Date date;
 	private String weather;
 	private double temperatures;
 	private double precipitation;
@@ -20,10 +23,10 @@ public class WeatherHistory {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getWeather() {

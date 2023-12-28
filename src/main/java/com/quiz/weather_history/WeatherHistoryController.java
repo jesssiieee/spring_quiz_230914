@@ -1,13 +1,16 @@
 package com.quiz.weather_history;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.weather_history.bo.WeatherHistoryBO;
 import com.quiz.weather_history.domain.WeatherHistory;
@@ -25,15 +28,30 @@ public class WeatherHistoryController {
 		return "weather_history/addWeather";
 	}
 	
+	// 날씨 추가 수행 => 날씨 목록으로 이동
+	@PostMapping("/add-weather") 
+	public String addWeather(
+			@RequestParam("date")@DateTimeFormat(pattern = "yyyy-MM-dd") Date date, 
+			@RequestParam("weather") String weather,
+			@RequestParam("microDust")String microDust ,
+			@RequestParam("temperatures")double temperatures ,
+			@RequestParam("precipitation")double precipitation ,
+			@RequestParam("windSpeed")double windSpeed ) {
+		
+		// db insert
+		weatherHistoryBO.addWeatherHistory(date, weather, microDust, temperatures, precipitation, windSpeed) ;
+		
+		// 결과 화면 => 리다이렉트 302
+		return "redirect:/weather_history/weather-list-view";
+		
+	}
+	
 	// url : http://localhost:8080/weather_history/weather-list-view
 	@GetMapping("/weather-list-view")
 	public String weatherListView(
-			Model model,
-			@ModelAttribute WeatherHistory weatherHistory ) {
+			Model model ) {
 		
-		weatherHistoryBO.addWeather(weatherHistory);
-		
-		List<WeatherHistory> weatherList = (List<WeatherHistory>) weatherHistoryBO.getWeatherHistoryById();
+		List<WeatherHistory> weatherList = weatherHistoryBO.getWeatherHistoryList();
 		model.addAttribute("weatherList", weatherList);
 		
 		return "weather_history/weatherList";
