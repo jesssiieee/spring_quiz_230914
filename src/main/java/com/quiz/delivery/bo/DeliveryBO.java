@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quiz.delivery.domain.Delivery;
+import com.quiz.delivery.domain.DeliveryJoin;
 import com.quiz.delivery.domain.DeliveryReview;
 import com.quiz.delivery.mapper.DeliveryMapper;
 
@@ -22,5 +23,11 @@ public class DeliveryBO {
 	public List<DeliveryReview> getDeliveryReviewList() {
 		return deliveryMapper.selectDeliveryReviewList();
 	}
+	
+	public List<DeliveryJoin> getDeliveryJoinList() {
+		return deliveryMapper.selectDeliveryJoinList();
+	}
+	
+	
 	
 }

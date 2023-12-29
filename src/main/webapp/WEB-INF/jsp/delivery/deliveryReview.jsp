@@ -35,17 +35,77 @@
 				
 				<div class="main">
 				
-					<c:forEach items="${deliveryReviewList }" var="drlist">
-						<a href="http://localhost:8080/delivery/delivery-review?storeId=${dlist.id }&storeName=${dlist.storeName }">
+					<c:forEach items="${deliveryJoin }" var="drlist">
 							<div class="line mt-3">
 								<div class="ml-3 mt-3">
-									<b>${drlist.username }</b><br>
-									<small>2021년 4월 3일</small>
+									<b>${drlist.userName }</b>
+									
+									<c:choose>
+										<c:when test="${drlist.point eq 5.0 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 4.5 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_half.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 4.0 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 3.5 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_half.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 3.0 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 2.5 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_half.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 2.0 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+										</c:when>
+										<c:when test="${drlist.point eq 1.5 }">
+											<img src="/img/star_fill.jpg" style="width:16px;" >
+											<img src="/img/star_half.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+											<img src="/img/star_empty.jpg" style="width:16px;" >
+										</c:when>
+									</c:choose>
+									<br>
+									<small style="color: grey">2021년 4월 3일</small><br>
 									<small> ${drlist.review }</small><br>
-									<small>${drlist.menu }</small><br>
+									<div class="menuStyle">
+										<small>${drlist.menu }</small><br>
+									</div>
 								</div>
 							</div>
-						</a>
 					</c:forEach>
 				
 				</div>

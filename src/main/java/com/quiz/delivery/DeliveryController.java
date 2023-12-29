@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quiz.delivery.bo.DeliveryBO;
 import com.quiz.delivery.domain.Delivery;
+import com.quiz.delivery.domain.DeliveryJoin;
 import com.quiz.delivery.domain.DeliveryReview;
 
 @Controller
@@ -38,6 +39,17 @@ public class DeliveryController {
 		model.addAttribute("deliveryReviewList", deliveryReviewList);
 		
 		return "delivery/deliveryReview";
+	}
+	
+	// url : http://localhost:8080/delivery/delivery-reviewjoin
+	@GetMapping("/delivery-reviewjoin")
+	public String deliveryReviewJoinList(Model model) {
+		
+		List<DeliveryJoin> deliveryJoin = deliveryBO.getDeliveryJoinList();
+		model.addAttribute("deliveryJoin", deliveryJoin);
+		
+		return "delivery/deliveryReview";
+		
 	}
 	
 }

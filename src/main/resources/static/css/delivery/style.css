@@ -28,5 +28,19 @@ p {
 }
 
 a:link {
-	color: black;
+  color : black;
+}
+a:visited {
+  color : black;
+}
+a:hover {
+  color : black;
+}
+a:active {
+  color : black
+}
+
+.menuStyle {
+	background-color: #E2E2E2;
+	width: 90px;
 }

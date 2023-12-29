@@ -20,7 +20,7 @@
 			
  	</select>
  	
- 	<select namespace="selectDeliveryReviewList" resultType="com.quiz.delivery.domain.DeliveryReview">
+ 	<select id="selectDeliveryReviewList" resultType="com.quiz.delivery.domain.DeliveryReview">
  	
  		SELECT
  			`id`
@@ -32,7 +32,18 @@
  			, `createdAt`
  			, `updatedAt`
  		FROM
- 			`review`
+ 			`new_review`
+ 	
+ 	</select>
+ 	
+ 	<select id="selectDeliveryJoinList" resultType="com.quiz.delivery.domain.DeliveryJoin">
+ 	
+ 		SELECT 
+ 			A.`name`, B.`menu`, B.`userName`, B.`point`, B.`review`
+		FROM 
+			`store` A, `new_review` B
+		WHERE
+			 A.`id` = B.`storeId`
  	
  	</select>
  

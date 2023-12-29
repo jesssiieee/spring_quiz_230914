@@ -36,7 +36,7 @@
 				<div class="main">
 				
 					<c:forEach items="${deliveryList }" var="dlist">
-						<a href="http://localhost:8080/delivery/delivery-review?storeId=${dlist.id }&storeName=${dlist.storeName }">
+						<a href="http://localhost:8080/delivery/delivery-review }">
 							<div class="line mt-3">
 								<div class="ml-3 mt-3">
 									<b>${dlist.name }</b><br>
