@@ -1,32 +1,22 @@
-package com.quiz.delivery.domain;
+package com.quiz.lesson05.domain;
 
-public class DeliveryJoin {
+import java.util.Date;
+
+public class Review {
 
 	private int id;
-	private int storeId;
-	private String name;
 	private String menu;
 	private String userName;
 	private double point;
 	private String review;
+	private Date createdAt;
+	private Date updatedAt;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getStoreId() {
-		return storeId;
-	}
-	public void setStoreId(int storeId) {
-		this.storeId = storeId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public String getMenu() {
 		return menu;
@@ -52,10 +42,17 @@ public class DeliveryJoin {
 	public void setReview(String review) {
 		this.review = review;
 	}
-	
-//	select A.`name`, B.`menu`, B.`userName`, B.`point`, B.`review`
-//	from `store` AS A
-//	inner join `new_review` AS B
-//	on A.`id` = B.`storeId`;
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	
 }
