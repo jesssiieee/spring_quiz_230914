@@ -24,6 +24,7 @@
 						<th>No.</th>
 						<th>이름</th>
 						<th>주소</th>
+						<th></th>
 					</tr>
 				</thead>
 				
@@ -32,7 +33,8 @@
 						<tr>
 							<td>${blist.getId() }</td>
 							<td>${blist.name }</td>
-							<td><a href = "${blist.url }"></a></td>
+							<td><a href = "${blist.url }" target="_blank">${blist.url }</a></td>
+							<td><button class="btn btn-danger" id="deleteBtn">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -40,5 +42,37 @@
 			</table>
 		
 		</div>
+		
+		<script>
+		
+			$(document).ready(function () {
+				
+				// 삭제버튼 클릭
+				$('#deleteBtn').on('click', function () {
+					// alert("삭제버튼");
+					
+					let id = $("#id").val();
+					
+					$.ajax({
+						
+						type:"POST"
+						, url:"/lesson06/delete-url"
+						, data:{"id":id}
+					
+						, success:funciont(data) {
+							if(data.delete_url) {
+								
+							}
+						}
+						
+						
+					}); // ajax
+					
+				}); // deleteBtn
+				
+			}); // ready
+		
+		</script>
+		
 	</body>
 </html>

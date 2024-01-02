@@ -22,4 +22,14 @@ public class BookMarkBO {
 		bookMarkMapper.insertBookMark(name, url);
 	}
 	
+	// input: url
+	// output: boolean
+	public boolean isDuplicationByUrl(String url) {
+		return bookMarkMapper.isDuplicationByUrl(url);
+	}
+	
+	public boolean deleteUrlById(int id) {
+		return bookMarkMapper.deleteUrlById(id);
+	}
+	
 }
