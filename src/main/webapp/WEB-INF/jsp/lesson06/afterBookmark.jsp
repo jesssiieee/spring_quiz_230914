@@ -32,7 +32,7 @@
 						<tr>
 							<td>${blist.getId() }</td>
 							<td>${blist.name }</td>
-							<td>${blist.url }</td>
+							<td><a href = "${blist.url }"></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

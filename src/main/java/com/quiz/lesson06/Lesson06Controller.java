@@ -1,6 +1,8 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,30 +17,37 @@ import com.quiz.lesson06.bo.BookMarkBO;
 import com.quiz.lesson06.domain.BookMark;
 
 @Controller
-@RequestMapping("/lesson06/quiz01")
-public class Lesson06Quiz01Controller {
+@RequestMapping("/lesson06")
+public class Lesson06Controller {
 
 	@Autowired
 	private BookMarkBO bookMarkBO;
 	
 	// 북마크 추가화면
-	//url: http://localhost:8080/lesson06/quiz01/add-bookmark
+	//url: http://localhost:8080/lesson06/add-bookmark
 	@GetMapping("/add-bookmark")
 	public String addBookmark() {
 		return "lesson06/addBookmark";
 	}
 	
+	// 입력 수행 - AJAX 통신 요청 => 응답값 JSON String
 	@ResponseBody
 	@PostMapping("/add-ing-bookmark")
-	public String ingAddBookmark (
+	public Map<String, Object> ingAddBookmark (
 		@RequestParam("name")String name, 
 		@RequestParam("url")String url) {
 		
 		bookMarkBO.addBookMark(name, url);
-		return "성공";
+		
+		// "{"code": 200, "result":"성공"}"
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result; // map => JSON String
 	}
 	
-	//url: http://localhost:8080/lesson06/quiz01/after-add-bookmark"
+	//url: http://localhost:8080/lesson06/after-add-bookmark
 	@GetMapping("/after-add-bookmark")
 	public String afterAddBookmark(
 			Model model) {
@@ -48,6 +57,20 @@ public class Lesson06Quiz01Controller {
 		model.addAttribute("bookmarklist", bookmarklist);
 		
 		return "lesson06/afterBookmark";
+	}
+	
+	// url 중복확인 ajax 통신 요청
+	@ResponseBody
+	@PostMapping("/checkUrl-do")
+	public String checkUrl(
+			@RequestParam("url") String url ) {
+		
+		String result = "N";
+		
+		boolean flag = bookMarkBO.checkUrl(url);
+		
+		return result;
+		
 	}
 	
 }

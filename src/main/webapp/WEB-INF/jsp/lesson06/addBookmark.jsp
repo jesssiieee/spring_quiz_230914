@@ -21,7 +21,10 @@
 			</div>
 			<div class="mt-3">
 				<b><span>주소</span></b>
-				<input type="text" id="url" class="form-control">
+				<div class="d-flex">
+					<input type="text" id="url" class="form-control">
+					<input type="button" id="checkBtn" class="btn btn-primary" value="중복 체크" style="">
+				</div>
 			</div>	
 			<div class="mt-3">
 				<input type="button" id="addbtn" class="btn btn-success" value="추가" style="width:930px;">
@@ -34,6 +37,7 @@
 		
 		$(document).ready(function() {
 			
+			// '추가' 버튼 클릭
 			$("#addbtn").on('click', function() {
 				
 				let id = $("#id").val();
@@ -50,21 +54,33 @@
 					return;
 				}
 				
+				// http 또는 https 프로토콜까지 모두 입력되었는지 확인
+				if (url.startsWith("http://") == false
+						&& url.startsWith("https://") == false) {
+					alert("주소 형식이 잘못 되었습니다.");
+				}
+				
+				
 				$.ajax ({
 					type:"POST"
-					, url:"/lesson06/quiz01/add-ing-bookmark"
+					, url:"/lesson06/add-ing-bookmark"
 					, data:{"id":id, "name":name, "url":url}
 				
-					, success:function(data) {
-						alert(data);
-						if (data == "성공") {
-							location.href = "/lesson06/quiz01/after-add-bookmark";
+					, success:function(data) { // data :  JSON String => parsing(jquery ajax 함수) => dictionary
+						alert(data.code);
+						/*
+						if (data ==  "성공") {
+							location.href = "/lesson06/after-add-bookmark";
 						}
+						*/
 					}
 					, error:function(request, status, error) {
+						alert("추가하는데 실패했습니다. 관리자에게 문의해주세요.")
+						<%--
 						alert(request);
 						alert(status);
 						alert(error);
+						--%>
 					} 
 				});
 			}); // click
