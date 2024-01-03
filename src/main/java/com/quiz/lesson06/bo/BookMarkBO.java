@@ -25,11 +25,15 @@ public class BookMarkBO {
 	// input: url
 	// output: boolean
 	public boolean isDuplicationByUrl(String url) {
-		return bookMarkMapper.isDuplicationByUrl(url);
+		// 중복 없음 : [] => 비어있는 list
+		// 중복 있음 : ["", ""] 채워져있는 리스트
+		List<BookMark> bookmarkList = bookMarkMapper.selectBookmarkList(url);
+		return bookmarkList.isEmpty() ? false : true;
+		// return !bookmarkList.isEmpty();
 	}
 	
-	public boolean deleteUrlById(int id) {
-		return bookMarkMapper.deleteUrlById(id);
+	public int deleteBookmarkById(int id) {
+		return bookMarkMapper.deleteBookmarkById(id);
 	}
 	
 }

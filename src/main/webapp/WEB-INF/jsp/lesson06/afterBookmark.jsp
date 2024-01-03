@@ -34,7 +34,13 @@
 							<td>${blist.getId() }</td>
 							<td>${blist.name }</td>
 							<td><a href = "${blist.url }" target="_blank">${blist.url }</a></td>
-							<td><button class="btn btn-danger" id="deleteBtn">삭제</button></td>
+							<td>
+								<!-- 1) value로 값 넣기 -->
+								<!-- <button type="button" class="del-btn btn btn-danger" value="${blist.getId() }" >삭제</button>  -->
+								
+								<!--  2) data로 값 넣기 ★★★data는 대문자로 이름 설정 안됨!★★★-->
+								<button type="button" class="del-btn btn btn-danger" data-bookmark-id=${blist.getId() } >삭제</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -48,23 +54,40 @@
 			$(document).ready(function () {
 				
 				// 삭제버튼 클릭
-				$('#deleteBtn').on('click', function () {
-					// alert("삭제버튼");
+				$('.del-btn').on('click', function (e) {
+					// 1) button value에 담은 값 가져오기
+					// let id = $(this).val();
+					// let id = $(this).attr("value");
+					// let id = e.target.value;
 					
-					let id = $("#id").val();
+					// 2) data를 이용해서 값 가져오기
+					// 태그 영역: data-bookmark-id
+					// 스크립트 영역: .data('bookmark-id')
+					let id = $(this).data('bookmark-id');
+					// alert(id);
 					
 					$.ajax({
 						
-						type:"POST"
+						// request
+						type:"DELETE"
 						, url:"/lesson06/delete-url"
 						, data:{"id":id}
-					
-						, success:funciont(data) {
-							if(data.delete_url) {
+						
+						// response
+						, success:function(data) {
+							if(data.code == 200) {
+								// 성공
+								location.reload(); // 새로고침
 								
+								
+							} else if(data.code == 500) {
+								// 실패
+								alert("error_message");
 							}
 						}
-						
+						, error:function(request, status, error) {
+							alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+						}
 						
 					}); // ajax
 					

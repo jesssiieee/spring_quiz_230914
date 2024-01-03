@@ -23,9 +23,10 @@
 				<b><span>주소</span></b>
 				<div class="d-flex">
 					<input type="text" id="url" class="form-control">
-					<input type="button" id="checkBtn" class="btn btn-primary" value="중복 체크" style="">
+					<input type="button" id="checkBtn" class="btn btn-info" value="중복 확인" style="">
 				</div>
-				<small id="urlStatusArea"></small>
+				<small class="text-danger d-none" id="duplicationText">중복된 url입니다.</small>
+				<small class="text-success d-none" id="availableUrlText">저장 가능한 url입니다.</small>
 				
 			</div>	
 			<div class="mt-3">
@@ -98,44 +99,43 @@
 			$('#checkBtn').on('click', function() {
 				
 				// alert("중복확인"); ok
+
+				let url = $('#url').val().trim();
 				
-				// urlStatusArea 태그의 하위 태그 초기화 
-				$('#urlStatusArea').empty();
-				
-				let url = $("#url").val().trim();
-				
-				// validation
-				// url이 비어있는지 확인
-				if (!url) {
-					$('#urlStatusArea').append('<span>url이 입력되지 않았습니다.</span>');
+				if (url == "") {
+					alert("url을 입력하세요");
 					return;
 				}
 				
-				// AJAX 통신
-				$.ajax ({
+				// AJAX 통신 - DB 중복확인
+				$.ajax({
 					
 					// request
-					type:"GET"
+					type:"POST"
 					, url:"/lesson06/is-duplication-url"
 					, data:{"url":url}
-				
+					
 					// response
-					, success:function(data) {
-						// {"code":200, "is_duplication":true}
+					, success:function(data) { // data: JSON String => dictionary
+						// {"code":200, "is_duplication":true} => 중복
 						if (data.is_duplication) {
-							// 중복일 경우
-							$('#urlStatusArea').append('<span class="text-danger">중복된 url입니다.</span>');
+							// 중복이다
+							$('#duplicationText').removeClass("d-none");
+							$('#availableUrlText').addClass("d-none");
 						} else {
-							// 중복이 아닐 경우
-							$('#urlStatusArea').append('<span class="text-success">저장 가능한 URL 입니다.</span>');
+							// 중복이 아니다. => 사용가능
+							$('#availableUrlText').removeClass("d-none");
+							$('#duplicationText').addClass("d-none");
 						}
 					}
 					
 					, error:function(request, status, error) {
-						alert("url 중복 체크에 실패했습니다.");
+						alert("url 중복확인에 실패하였습니다.");
 					}
 					
-				}); // ajax
+				});
+				
+				
 				
 			}); // checkBtn
 			
