@@ -67,7 +67,7 @@ public class Lesson06Controller {
 		
 		String result = "N";
 		
-		boolean flag = bookMarkBO.checkUrl(url);
+//		boolean flag = bookMarkBO.checkUrl(url);
 		
 		return result;
 		
