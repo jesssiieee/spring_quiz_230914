@@ -61,16 +61,32 @@ public class Lesson06Controller {
 	
 	// url 중복확인 ajax 통신 요청
 	@ResponseBody
-	@PostMapping("/checkUrl-do")
-	public String checkUrl(
+	@GetMapping("/is-duplication-url")
+	public Map<String, Object> isDuplicationUrl (
 			@RequestParam("url") String url ) {
 		
-		String result = "N";
+		boolean isDuplication = bookMarkBO.isDuplicationByUrl(url);
 		
-//		boolean flag = bookMarkBO.checkUrl(url);
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200); // 성공
+		result.put("is_duplication", isDuplication);
+				
+		
+		return result;
+	}
+	
+	// url 삭제
+	@PostMapping("/delete-url")
+	public Map<String, Object> idDeletePost(
+			@RequestParam("id") int id ) {
+		
+		boolean deleteUrl = bookMarkBO.deleteUrlById(id);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("delete_url", deleteUrl);
 		
 		return result;
 		
 	}
-	
 }

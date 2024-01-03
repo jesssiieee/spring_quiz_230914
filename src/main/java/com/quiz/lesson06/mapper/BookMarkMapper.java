@@ -16,4 +16,9 @@ public interface BookMarkMapper {
 			@Param("name")String name, 
 			@Param("url")String url);
 	
+	public boolean isDuplicationByUrl(String url);
+	
+	// 즐겨찾기 항목 삭제
+	public boolean deleteUrlById(int id);
+	
 }
