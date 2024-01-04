@@ -31,14 +31,14 @@ public class BookingBO {
 		return bookingMapper.deleteBookingListById(id);
 	}
 	
-	// public Booking getBookingByNamePhoneNumber(String name, String phoneNumber) {
-		
-	// }
-	
-	
-	public boolean isDuplicationByNamePhoneNumber(String name, String phoneNumber) {
-		List<Booking> bookingList = bookingMapper.selectBookingList(name, phoneNumber);
-		return bookingList.isEmpty() ? false : true;
+	@SuppressWarnings("unchecked")
+	public Booking getBookingByNamePhoneNumber(String name, String phoneNumber) {
+	    List<Booking> bookings = (List<Booking>) bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
+
+	    if (!bookings.isEmpty()) {
+	        return bookings.get(0); // 여러 개 중 첫 번째 결과를 사용
+	    } else {
+	        return null; // 예약이 없을 경우 null 반환
+	    }
 	}
-	
 }
