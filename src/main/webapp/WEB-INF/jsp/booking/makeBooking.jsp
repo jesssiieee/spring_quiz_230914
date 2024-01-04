@@ -67,7 +67,8 @@
 				
 				// 날짜 선택
 				$("#date").datepicker({
-					dateFormat: "yy-mm-dd"
+					minDate:0
+					, dateFormat: "yy-mm-dd"
 				});
 				
 				// 예약하기 버튼 클릭
@@ -92,9 +93,19 @@
 						return;
 					}
 					
+					if (isNaN(day)) { // 숫자가 아닐 때 참
+						alert("숙박일은 숫자만 입력 가능합니다.");
+						return;
+					}
+					
 					let headcount = $('#headcount').val().trim();
 					if (headcount == "") {
 						alert("숙박인원을 입력하세요.");
+						return;
+					}
+					
+					if (isNaN(headcount)) { // 숫자가 아닐 때 참
+						alert("숙박인원은 숫자만 입력 가능합니다.");
 						return;
 					}
 					
@@ -106,20 +117,20 @@
 					
 					$.ajax({
 						
+						// request
 						type:"POST"
 						, url:"/booking/add-booking-list"
 						, data:{"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber}
 					
+						// response
 						, success:function(data) {
 							if(data.code == 200) {
 								alert("예약이 완료되었습니다.");
+								location.href="/booking/booking-list-view";
 							}
 						}
 						, error(request, status, error) {
 							alert("예약 중 문제가 발생했습니다. 관리자에게 문의하세요.")
-							// alert(request);
-							// alert(status);
-							// alert(error);
 						}
 						
 					}); // ajax

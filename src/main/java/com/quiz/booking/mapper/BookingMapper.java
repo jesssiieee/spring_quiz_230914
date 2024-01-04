@@ -14,6 +14,11 @@ public interface BookingMapper {
 	// get booking list
 	public List<Booking> selectBookingList();
 	
+	// duplication
+	public List<Booking> selectBookingList(
+			@Param("name")String name,
+			@Param("phoneNumber")String phoneNumber );
+	
 	// add booking list
 	public void insertBookingList(
 			@Param("name") String name, 
@@ -21,5 +26,8 @@ public interface BookingMapper {
 			@Param("day") int day, 
 			@Param("headcount") int headcount, 
 			@Param("phoneNumber") String phoneNumber);
+	
+	// delete booking list
+	public int deleteBookingListById(int id);
 	
 }

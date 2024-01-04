@@ -28,7 +28,7 @@
 		        </ul>
 		    </nav>
 		    <section class="banner bg-info">
-	            <img id="bannerImage" src="/img/test06_banner1.jpg" alt="banner" width="1110" height="500">
+	            <img id="bannerImage" src="/img/booking/test06_banner1.jpg" alt="banner" width="1110" height="500">
 	        </section>
 	        <section class="reserve bg-primary d-flex">
 	            <section class="real-time-reserved col-4 d-flex justify-content-center align-items-center">
@@ -38,12 +38,12 @@
 	                <div id="memberBox" class="mr-3 pt-3">
 	                	<span class="reserve-confirm-text">예약 확인</span>
 	                    <div class="d-flex align-items-center justify-content-end mt-3">
-	                        <span class="text-white mr-2">아이디</span>
-	                        <input type="text" id="id" class="form-control col-9">
+	                        <span class="text-white mr-2">이름</span>
+	                        <input type="text" id="name" class="form-control col-9">
 	                    </div>
 	                    <div class="d-flex align-items-center justify-content-end mt-3">
-	                        <span class="text-white mr-2">비밀번호</span>
-	                        <input type="password" id="password" class="form-control col-9">
+	                        <span class="text-white mr-2">전화번호</span>
+	                        <input type="text" id="phoneNumber" class="form-control col-9">
 	                    </div>
 	
 	                    <!-- 버튼 -->
@@ -67,5 +67,77 @@
 		        </small>
 		    </footer>
 		</div>
+		
+		<script>
+			
+			$(document).ready(function() {
+				
+				// 이미지 자동 변경
+				/*
+				let bannerSrcArr = ['/img/booking/test06_banner1.jpg', '/img/booking/test06_banner2.jpg', '/img/booking/test06_banner3.jpg', '/img/booking/test06_banner4.jpg'];
+				let currentIndex = 0;
+				setInterval(function() {
+					 $('#bannerImage').attr('src', bannerSrcArr[currentIndex]);
+	                 currentIndex++;
+	                 
+	                 if (currentIndex > bannerSrcArr.length) { // 인덱스 값이 배열의 크기를 넘으면 0으로(처음 이미지) 세팅
+	                        currentIndex = 0;
+	                    }
+				}, 3000);
+				*/;
+				
+				
+				$('.submit-btn').on('click', function () {
+					// alert("클릭");
+					
+					let name = $('#name').val().trim();
+					if (!name) {
+						alert("조회할 이름을 입력하세요.");
+						return;
+					}
+					
+					let phoneNumber = $('#phoneNumber').val().trim();
+					if (!phoneNumber) {
+						alert("조회할 전화번호를 입력하세요.");
+						return;
+					}
+					
+					$.ajax({
+						
+						type:"POST"
+						, url:"/booking/check-booking-list"
+						, data:{"name":name, "phoneNumber":phoneNumber}
+					
+						// response
+						, success:function(data) { // data: JSON String => dictionary
+							/*
+							if (data.is_duplication) {
+								// 중복이다
+								alert(
+									"이름 : " + name 
+									//"날짜 : " +  + "\n"+
+									//"일수 : " +  + "\n"+
+									//"인원 : " +  + "\n"+
+									//"상태 : " +  
+								);
+								
+							} else {
+								// 중복이 아니다. => 사용가능
+								alert("예약 내역이 없습니다.");
+							}
+							*/
+						}
+						, error(request, status, error) {
+							alert("예약자 확인에 실패하였습니다. 관리자에게 문의하세요.");
+						}
+						
+					});
+					
+				}); // submit-btn
+						
+			}); //ready
+		
+		</script>
+		
 	</body>
 </html>

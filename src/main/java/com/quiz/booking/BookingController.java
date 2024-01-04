@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +31,10 @@ public class BookingController {
 	@GetMapping("/booking-list-view")
 	public String bookingListView(Model model) {
 		
-		// get booking list
+		// select DB
 		List<Booking> bookingList = bookingBO.getBookingList();
+		
+		// model에 담기
 		model.addAttribute("bookingList", bookingList);
 		
 		return "booking/bookingList";
@@ -65,11 +68,54 @@ public class BookingController {
 		
 	}
 	
+	// 예약 삭제하기 - ajax
+	@ResponseBody
+	@DeleteMapping("/delete-booking-list")
+	public Map<String, Object> deleteBookingList (
+			@RequestParam("id") int id ) {
+		
+		// db 삭제
+		int rowCount = bookingBO.deleteBookingListById(id);
+		
+		Map<String, Object> result = new HashMap<>();
+		if (rowCount > 0) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "삭제하는데 실패했습니다.");
+		}
+		
+		return result;
+		
+	}
+	
+	
 	// 예약 확인 화면
 	// url : http://localhost:8080/booking/check-booking-view
 	@GetMapping("/check-booking-view")
 	public String checkBookingView() {
 		return "booking/checkBooking";
+	}
+	
+	// 예약자 확인 - ajax
+	@ResponseBody
+	@PostMapping("/check-booking-list")
+	public Map<String, Object> checkBookingList (
+			@RequestParam("name") String name, 
+			@RequestParam("phoneNumber") String phoneNumber ) {
+		
+		// Booking booking = bookingBO.getBookingByNamePhoneNumber(name, phoneNumber);
+		
+		// duplication 확인
+		boolean isDuplication = bookingBO.isDuplicationByNamePhoneNumber(name, phoneNumber);
+		
+		// result
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200); // 성공
+		result.put("is_duplication", isDuplication);
+		
+		return result;
 	}
 	
 	

@@ -29,9 +29,11 @@
 		            <li class="nav-item"><a href="/booking/booking-list-view" class="nav-link text-white font-weight-bold">예약목록</a></li>
 		        </ul>
 		    </nav>
+		    
 		    <section class="contents py-4">
 		        <h2 class="text-center font-weight-bold m-4">예약 목록 보기</h2>
 		        <table class="table text-center">
+		        
 		            <thead>
 		                <tr>
 		                    <th>이름</th>
@@ -43,6 +45,7 @@
 		                    <th></th>
 		                </tr>
 		            </thead>
+		            
 		            <tbody>
 			            <c:forEach items="${bookingList}" var="bList">
 			                <tr>
@@ -56,22 +59,26 @@
 			                    <td>
 			                    	<c:choose>
 			                    		<c:when test="${bList.state eq '대기중'}">
-			                    			<span style="color:green;">${bList.state }</span>
+			                    			<span style="color:blue;">${bList.state }</span>
 			                    		</c:when>
 			                    		<c:when test="${bList.state eq '확정'}">
-			                    			<span style="color:blue;">${bList.state }</span>
+			                    			<span style="color:green;">${bList.state }</span>
 			                    		</c:when>
 			                    		<c:when test="${bList.state eq '취소'}">
 			                    			<span style="color:red;">${bList.state }</span>
 			                    		</c:when>
 			                    	</c:choose>
 			                    </td>
-			                    <td><button type="button" class="btn btn-danger">삭제</button></td>
+			                    <td>
+			                    	<button type="button" class="del-btn btn btn-danger" data-booking-id=${bList.getId() }>삭제</button>
+			                    </td>
 			                </tr>
 			             </c:forEach>
 		            </tbody>
+		            
 		        </table>
 		    </section>
+		    
 		    <footer>
 		        <small class="text-secondary">
 		            제주특별자치도 제주시 애월읍<br>
@@ -79,6 +86,48 @@
 		            Copyright 2024 tongnamu. All right reserved.
 		        </small>
 		    </footer>
+		    
 		</div>
+		
+		<script>
+		     
+			$(document).ready(function () {
+				
+				// 삭제버튼 클릭
+				$('.del-btn').on('click', function (e) {
+					
+					let id = $(this).data('booking-id');
+					// alert(id);
+					
+					$.ajax ({
+						
+						// request
+						type:"DELETE"
+						, url:"/booking/delete-booking-list"
+						, data:{"id":id}
+						
+						// response
+						, success:function(data) {
+							if (code == 200) {
+								// 성공
+								alert("삭제 완료되었습니다.");
+								location.reload(true); // 새로고침
+							} else if (code == 500) {
+								alert("error_message");
+							}
+						}
+						
+						, error(request, status, error) {
+							alert("예약 취소에 실패하였습니다. 관리자에게 문의해주세요.")
+						}
+					
+					}); // ajax
+					
+				}); // del-btn
+				
+			}); // ready
+		
+		</script>
+		
 	</body>
 </html>

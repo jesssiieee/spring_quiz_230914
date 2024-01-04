@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.quiz.booking.domain.Booking;
 import com.quiz.booking.mapper.BookingMapper;
+import com.quiz.lesson06.domain.BookMark;
 
 @Service
 public class BookingBO {
@@ -23,6 +24,21 @@ public class BookingBO {
 	// add booking
 	public void addBookingList(String name, Date date, int day, int headcount, String phoneNumber) {
 		bookingMapper.insertBookingList(name, date, day, headcount, phoneNumber);
+	}
+	
+	// delete booking
+	public int deleteBookingListById(int id) {
+		return bookingMapper.deleteBookingListById(id);
+	}
+	
+	// public Booking getBookingByNamePhoneNumber(String name, String phoneNumber) {
+		
+	// }
+	
+	
+	public boolean isDuplicationByNamePhoneNumber(String name, String phoneNumber) {
+		List<Booking> bookingList = bookingMapper.selectBookingList(name, phoneNumber);
+		return bookingList.isEmpty() ? false : true;
 	}
 	
 }

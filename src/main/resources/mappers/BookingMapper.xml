@@ -31,6 +31,7 @@
  			, `day`
  			, `date`
  			, `phoneNumber`
+ 			, `state`
  			, `createdAt`
  			, `updatedAt`
  		)
@@ -41,10 +42,20 @@
  			, #{day}
  			, #{date}
  			, #{phoneNumber}
+ 			, '대기중'
  			, NOW()
  			, NOW()
  		);
  	
  	</insert>
+ 	
+ 	<delete id="deleteBookingListById" parameterType="int">
+ 		
+ 		DELETE FROM
+ 			`booking`
+ 		WHERE
+ 			`id` = #{id}
+ 		
+ 	</delete>
  
  </mapper>
