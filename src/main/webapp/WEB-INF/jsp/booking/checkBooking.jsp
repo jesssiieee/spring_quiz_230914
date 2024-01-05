@@ -127,19 +127,21 @@
 						, data:{"name":name, "phoneNumber":phoneNumber}
 					
 						// response
-						, success: function(response) {
-						      if (response.status === 'success') {
-						          var reservationDetails = response.reservationDetails;
-						          alert(
-						            '이름: ' + reservationDetails.name +
-						            '\n날짜: ' + reservationDetails.date +
-						            '\n일수: ' + reservationDetails.days +
-						            '\n인원: ' + reservationDetails.people +
-						            '\n상태: ' + reservationDetails.status
-						          );
-						        } else {
-						          alert('예약 내역이 없습니다.');
-						        }
+						, success: function(data) {
+							// {"code": 200, "result":"{"name":"홍길동", ...}"}     
+							if (data.code == 200) { // 예약내역이 존재하는 경우
+								alert(
+									"이름 : " + data.result.name + "\n" + 
+									"날짜 : " + data.result.date.slice(0, 10) + "\n" +
+									"일수 : " + data.result.day + "\n" +
+									"인원 : " + data.result.headcount + "\n" +
+									"상태 : " +  data.result.state
+								);
+								
+							} else if (data.code == 500) { // 예약 내역이 존재하지 않는 경우
+								alert(data.error_message);
+							}
+							
 					      }
 						, error(request, status, error) {
 							alert("예약자 확인에 실패하였습니다. 관리자에게 문의하세요.");

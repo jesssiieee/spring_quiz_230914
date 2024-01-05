@@ -33,12 +33,20 @@ public class BookingBO {
 	
 	@SuppressWarnings("unchecked")
 	public Booking getBookingByNamePhoneNumber(String name, String phoneNumber) {
-	    List<Booking> bookings = (List<Booking>) bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
-
-	    if (!bookings.isEmpty()) {
-	        return bookings.get(0); // 여러 개 중 첫 번째 결과를 사용
-	    } else {
-	        return null; // 예약이 없을 경우 null 반환
-	    }
+	   
+		// 없는 경우 : [] null, 존재하는 경우[...] 객체
+		List<Booking> bookingList =  bookingMapper.selectBookingListByNamePhoneNumber(name, phoneNumber);
+		
+//		if (bookingList.isEmpty()) {
+//			return null;
+//		} else {
+//			return bookingList.get(bookingList.size() - 1); // 마지막 인덱스 
+//		}
+		
+		return bookingList.isEmpty() ? null : bookingList.get(bookingList.size() - 1);
+			
+		
+		
+		
 	}
 }

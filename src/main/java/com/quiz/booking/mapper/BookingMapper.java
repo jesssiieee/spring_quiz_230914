@@ -30,7 +30,9 @@ public interface BookingMapper {
 	// delete booking list
 	public int deleteBookingListById(int id);
 	
-	public Booking selectBookingByNamePhoneNumber(
+	// input : name, phoneNumber
+	// output : List
+	public List<Booking> selectBookingListByNamePhoneNumber(
 		    @Param("name") String name, 
 			@Param("phoneNumber") String phoneNumber);
 	

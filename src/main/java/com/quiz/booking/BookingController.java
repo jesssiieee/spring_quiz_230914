@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,35 +99,23 @@ public class BookingController {
 			@RequestParam("name") String name,
 			@RequestParam("phoneNumber") String phoneNumber) {
 
+		// {"code": 200, "result":"booking 객체"}
+		// {"code": 200, "result":"{"name":"홍길동", ...}"}
+		Map<String, Object> result = new HashMap<>();
+		
 		Booking booking = bookingBO.getBookingByNamePhoneNumber(name, phoneNumber);
-
-		// result
-		// Map<String, Object> result = new HashMap<>();
-		// result.put("code", 200); // 성공
-		// result.put("data", "성공");
-		// return result;
-
-		Map<String, Object> response = new HashMap<>();
-
-		if (booking != null) {
-			// 예약 내역이 있을 경우 reservationDetails를 생성하여 응답에 포함합니다.
-			Map<String, Object> reservationDetails = new HashMap<>();
-			reservationDetails.put("name", booking.getName());
-			reservationDetails.put("date", booking.getDate());
-			reservationDetails.put("days", booking.getDay());
-			reservationDetails.put("people", booking.getHeadcount());
-			reservationDetails.put("status", booking.getState());
-
-			response.put("status", "success");
-			response.put("reservationDetails", reservationDetails);
+		
+		if (booking == null) {
+			// {"code": 500, "error_message":"예약 내역이 존재하지 않습니다."}
+			result.put("code", 500);
+			result.put("error_message", "예약 내역이 존재하지 않습니다.");
 		} else {
-			// 예약 내역이 없을 경우 응답에 에러 메시지를 포함합니다.
-			response.put("status", "error");
-			response.put("message", "예약 내역이 없습니다.");
+			result.put("code", 200);
+			result.put("result", booking);
 		}
-
-		return response;
-
+		
+		return result;
+		
 	}
 
 }
