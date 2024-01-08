@@ -2,12 +2,11 @@ package com.quiz.lesson05.mapper;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 import com.quiz.lesson05.domain.Review;
 
-@Repository
+@Mapper
 public interface ReviewMapper {
 	
 	public List<Review> selectReviewByStoreId(int storeId);
