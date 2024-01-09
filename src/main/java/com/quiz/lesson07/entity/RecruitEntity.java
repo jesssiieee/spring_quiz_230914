@@ -1,7 +1,9 @@
 package com.quiz.lesson07.entity;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.Date;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,11 +46,13 @@ public class RecruitEntity {
 	
 	private int salary;
 	
-	private Date deadline;
+	private LocalDateTime deadline; // 시분초 없음, 타임존 정보 없음
 	
+	@UpdateTimestamp
 	@Column(name="createdAt", updatable = false)
 	private ZonedDateTime createdAt;
 	
+	@UpdateTimestamp
 	@Column(name="updatedAt")
 	private ZonedDateTime updatedAt;
 	
